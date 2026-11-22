@@ -43,4 +43,5 @@ namespace ShooterConstants {
     constexpr double kHomingSpeed = -0.15;
     constexpr double kHomingCurrentAmps = 12.0;
     constexpr int kHomingDebounceCycles = 5;
+    //
 }
