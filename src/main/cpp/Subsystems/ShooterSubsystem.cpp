@@ -1,4 +1,8 @@
 #include "subsystems/ShooterSubsystem.h"
+<<<<<<< HEAD
+=======
+#include <algorithm>
+>>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
 
 void ShooterSubsystem::Init() {
     rev::spark::SparkBaseConfig config{};
@@ -17,6 +21,11 @@ void ShooterSubsystem::Init() {
         rev::PersistMode::kPersistParameters
     );
 
+<<<<<<< HEAD
+=======
+    ZeroEncoder();
+
+>>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
     rev::spark::SparkBaseConfig config1{};
     config.Inverted(false);
     config.OpenLoopRampRate(ShooterConstants::kRampRateSeconds);
@@ -27,6 +36,7 @@ void ShooterSubsystem::Init() {
         rev::PersistMode::kPersistParameters);
 }
 
+<<<<<<< HEAD
 void ShooterSubsystem::StartHoming() {
     m_isHoming = true;
     m_currentSpikeCount = 0;
@@ -83,6 +93,26 @@ void ShooterSubsystem::Stop() {
 }
 //
 
+=======
+void ShooterSubsystem::SetPosition(double targetRotations) {
+    m_shooterArmMotor.GetClosedLoopController().SetSetpoint(
+        targetRotations,
+        rev::spark::SparkLowLevel::ControlType::kPosition);
+}
+
+void ShooterSubsystem::ZeroEncoder() {
+    m_shooterArmMotor.GetEncoder().SetPosition(0.0);
+}
+
+void ShooterSubsystem::Stop() {
+    m_shooterArmMotor.StopMotor();
+    m_shooterMotor.StopMotor();
+}
+
+double ShooterSubsystem::GetPosition() {
+    return m_shooterArmMotor.GetEncoder().GetPosition();
+}
+>>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
 
 void ShooterSubsystem::SetSpeed(double speed) {
     double clamped = std::clamp(speed, -ShooterConstants::kMaxSpeed, ShooterConstants::kMaxSpeed);
