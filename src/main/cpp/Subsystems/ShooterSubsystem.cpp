@@ -1,8 +1,4 @@
 #include "subsystems/ShooterSubsystem.h"
-<<<<<<< HEAD
-=======
-#include <algorithm>
->>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
 
 void ShooterSubsystem::Init() {
     rev::spark::SparkBaseConfig config{};
@@ -21,11 +17,6 @@ void ShooterSubsystem::Init() {
         rev::PersistMode::kPersistParameters
     );
 
-<<<<<<< HEAD
-=======
-    ZeroEncoder();
-
->>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
     rev::spark::SparkBaseConfig config1{};
     config.Inverted(false);
     config.OpenLoopRampRate(ShooterConstants::kRampRateSeconds);
@@ -36,64 +27,6 @@ void ShooterSubsystem::Init() {
         rev::PersistMode::kPersistParameters);
 }
 
-<<<<<<< HEAD
-void ShooterSubsystem::StartHoming() {
-    m_isHoming = true;
-    m_currentSpikeCount = 0;
-    m_shooterArmMotor.Set(ShooterConstants::kHomingSpeed);
-}
-
-void ShooterSubsystem::UpdateHoming() {
-    if (!m_isHoming) {
-        return;
-    }
-
-    m_shooterArmMotor.Set(ShooterConstants::kHomingSpeed);
-
-    if (m_shooterArmMotor.GetOutputCurrent() >= ShooterConstants::kHomingCurrentAmps) {
-        m_currentSpikeCount++;
-        if (m_currentSpikeCount >= ShooterConstants::kHomingDebounceCycles) {
-            m_shooterArmMotor.StopMotor();
-            m_shooterArmMotor.GetEncoder().SetPosition(0.0);
-            m_isHoming = false;
-            m_currentSpikeCount = 0;
-        }
-    } else {
-        m_currentSpikeCount = 0;
-    }
-}
-
-bool ShooterSubsystem::IsHoming() const {
-  return m_isHoming;
-}
-
-void ShooterSubsystem::SetAngleDegrees(double targetDegrees) {
-    if (m_isHoming) {
-        return;
-    }
-
-    double targetRotations = targetDegrees * (ShooterConstants::kGearRatio / 360.0);
-    m_shooterArmMotor.GetClosedLoopController().SetSetpoint(
-        targetRotations,
-        rev::spark::SparkLowLevel::ControlType::kPosition
-    );
-}
-
-double ShooterSubsystem::GetAngleDegrees() {
-    double rotations = m_shooterArmMotor.GetEncoder().GetPosition();
-    return rotations * (360.0 / ShooterConstants::kGearRatio);
-}
-
-void ShooterSubsystem::Stop() {
-    m_isHoming = false;
-    m_currentSpikeCount = 0;
-    m_shooterArmMotor.StopMotor();
-
-    m_shooterMotor.StopMotor();
-}
-//
-
-=======
 void ShooterSubsystem::SetPosition(double targetRotations) {
     m_shooterArmMotor.GetClosedLoopController().SetSetpoint(
         targetRotations,
@@ -112,7 +45,6 @@ void ShooterSubsystem::Stop() {
 double ShooterSubsystem::GetPosition() {
     return m_shooterArmMotor.GetEncoder().GetPosition();
 }
->>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
 
 void ShooterSubsystem::SetSpeed(double speed) {
     double clamped = std::clamp(speed, -ShooterConstants::kMaxSpeed, ShooterConstants::kMaxSpeed);

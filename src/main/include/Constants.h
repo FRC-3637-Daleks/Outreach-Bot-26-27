@@ -16,16 +16,12 @@ namespace DriveConstants {
 }
 
 namespace ShooterConstants {
-<<<<<<< HEAD
     //shooter wheels
     constexpr int kShooterWheelMotorID = 7;
     constexpr double kMaxSpeed = 0.85; // %
     constexpr double kRampRateSeconds = 0.25;
 
     //shooter arm
-=======
-    // Shooter Arm
->>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
     constexpr int kShooterArmMotorID = 6;
     constexpr int kShooterCurrentLimit = 40;
     constexpr double kP = 0.05;
@@ -38,7 +34,6 @@ namespace ShooterConstants {
     constexpr double kRestPostition = 0.0;
     constexpr double kActivePosition = 10.0;
 
-<<<<<<< HEAD
     constexpr double kGearRatio = 4.0;
 
     constexpr double kStowAngleDeg = 0.0;
@@ -49,10 +44,4 @@ namespace ShooterConstants {
     constexpr double kHomingCurrentAmps = 12.0;
     constexpr int kHomingDebounceCycles = 5;
     //
-=======
-    // Shooter Wheels
-    constexpr int kShooterWheelMotorID = 7;
-    constexpr double kMaxSpeed = 0.85; // %
-    constexpr double kRampRateSeconds = 0.25;
->>>>>>> 726937232b4cc79982008f681f2aafb4dd4ef934
 }
