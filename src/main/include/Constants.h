@@ -31,8 +31,9 @@ namespace ShooterConstants {
     constexpr double kMinOutput = -0.4;
     constexpr double kMaxOutput = 0.4;
 
-    constexpr double kRestPostition = 0.0;
-    constexpr double kActivePosition = 10.0;
+    constexpr double kRestPosition = 0.0;
+    constexpr double kCatchingPosition = 60.0;
+    constexpr double kActivePosition = 180.0;
 
     constexpr double kGearRatio = 4.0;
 
@@ -43,5 +44,7 @@ namespace ShooterConstants {
     constexpr double kHomingSpeed = -0.15;
     constexpr double kHomingCurrentAmps = 12.0;
     constexpr int kHomingDebounceCycles = 5;
-    //
+
+    constexpr double kIntakeSpeed = 0.2;
+    constexpr double kUSStopDistance = 3.5;
 }

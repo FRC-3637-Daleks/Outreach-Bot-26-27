@@ -15,6 +15,16 @@ void ShooterSubsystem::Init() {
       config,
       rev::ResetMode::kResetSafeParameters,
       rev::PersistMode::kPersistParameters);
+
+  rev::spark::SparkBaseConfig config1{};
+  config.Inverted(true);
+  
+  m_ShooterMotor.Configure(
+    config1,
+    rev::ResetMode::kResetSafeParameters,
+    rev::PersistMode::kPersistParameters
+  );
+
 }
 
 void ShooterSubsystem::StartHoming() {
@@ -48,7 +58,6 @@ bool ShooterSubsystem::IsHoming() const {
 }
 
 void ShooterSubsystem::SetAngleDegrees(double targetDegrees) {
-  // Don't fight an active homing pass with a PID setpoint
   if (m_isHoming) {
     return;
   }
@@ -68,4 +77,32 @@ void ShooterSubsystem::Stop() {
   m_isHoming = false;
   m_currentSpikeCount = 0;
   m_shooterArmMotor.StopMotor();
+  m_ShooterMotor.StopMotor();
+}
+
+void ShooterSubsystem::SetIntaking(bool intaking) {
+  m_isIntaking = intaking;
+}
+
+void ShooterSubsystem::SetCatching(bool catching) {
+  m_isCatching = catching;
+}
+
+void ShooterSubsystem::UpdateIntakeOrCatch(bool distanceInches) {
+  if ((!m_isIntaking && !m_isCatching) || m_isHoming) {
+    return;
+  }
+
+  m_ShooterMotor.Set(ShooterConstants::kIntakeSpeed);
+
+  if (distanceInches > 0.0 && distanceInches <= ShooterConstants::kUSStopDistance) {
+    m_ShooterMotor.StopMotor();
+    m_isIntaking = false;
+    m_isCatching = false;
+    StartHoming();
+  }
+}
+
+void ShooterSubsystem::StopRoller() {
+  m_ShooterMotor.StopMotor();
 }
