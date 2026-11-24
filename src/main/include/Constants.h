@@ -39,12 +39,16 @@ namespace ShooterConstants {
 
     constexpr double kStowAngleDeg = 0.0;
     constexpr double kIntakeAngleDeg = 180.0;
-    constexpr double kCatchAngleDeg = 60;
+    constexpr double kCatchAngleDeg = 60.0;
+    constexpr double kDefaultShooterAngle = 90.0;
 
     constexpr double kHomingSpeed = -0.15;
     constexpr double kHomingCurrentAmps = 12.0;
     constexpr int kHomingDebounceCycles = 5;
 
     constexpr double kIntakeSpeed = 0.2;
+    constexpr double kShootingSpeed = 0.7;
+
     constexpr double kUSStopDistance = 3.5;
+    constexpr int kNoteDebounceCycles = 3;
 }
